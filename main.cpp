@@ -14,29 +14,41 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
- 
-void creat(TreeNode* &p) {
-    int a;
-    cin >> a;
-    if (a == 0) {
-        p = nullptr;
+class Solution {
+public:
+    TreeNode* build(vector<int> &inorder, int inorderBegin, int inorderEnd,
+                    vector<int> &postorder, int postorderBegin, int postorderEnd) {
+            if (postorderBegin > postorderEnd) return nullptr;
+            TreeNode *root = new TreeNode(postorder[postorderEnd]);
+            if (postorderBegin == postorderEnd) return root;
+            int index;
+            for (index = 0; index <= inorderEnd; index++) {
+                if (inorder[index] == postorder[postorderEnd]) break;
+            }
+            // Õ≥“ª≤…”√◊Û±’”“±’µƒ∑Ω Ω
+            int leftinorderBegin = inorderBegin;
+            int leftinorderEnd = index - 1;
+            int rightinorderBegin = index + 1;
+            int rightinorderEnd = inorderEnd;
+
+            int leftpostorderBegin = postorderBegin;
+            int leftpostorderEnd = postorderBegin + index - inorderBegin - 1;
+            int rightpostorderBegin = postorderBegin + index - inorderBegin;
+            int rightpostorderEnd = postorderEnd - 1;//≈≈≥˝◊Ó∫Û“ª∏ˆ‘™Àÿ
+            root->left = build(inorder, leftinorderBegin, leftinorderEnd, postorder, leftpostorderBegin, 
+                            leftpostorderEnd);
+            root->right = build(inorder, rightinorderBegin, rightinorderEnd, postorder, rightpostorderBegin, 
+                            rightpostorderEnd);
+            return root;
+            
     }
-    else {
-        p = new TreeNode(a);
-        creat(p->left);
-        creat(p->right);
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+           TreeNode *root = build(inorder, 0, inorder.size() - 1, 
+                                 postorder, 0, postorder.size() -1);
+            return root;
+            
     }
-}
-int treeDepth(TreeNode *root) {
-        if (root == nullptr) {
-            return 0;
-        }
-        else {
-            int m = treeDepth(root->left);
-            int n = treeDepth(root->right);
-            return m >= n ? (m + 1) : (n + 1);
-        }
-}
+};
 void preorder(TreeNode *root) {
     if (root == nullptr) {
         return;
@@ -44,34 +56,78 @@ void preorder(TreeNode *root) {
     cout << root->val << " ";
     preorder(root->left);
     preorder(root->right);
-}
-void level(TreeNode *root, int l, vector<vector<int>> &result) {
-    if (root == nullptr) {
-        return;
-    }
-    //cout << root->val << " ";
-    result[l].push_back(root->val);
-    level(root->left, l + 1, result);
-    level(root->right, l + 1, result);
-}
-int main() {
-    TreeNode *root = nullptr;
-    creat(root);
-    preorder(root);
-    cout << endl;
-    int l = treeDepth(root);
-    cout << l << endl;
-    vector<vector<int>> result(l);
-    level(root, 0, result);
-    for (auto &a : result) {
-        for (auto & b : a) {
-            cout << b << " ";
-        }
-        cout << endl;
-    }
-    return 0;
 
 }
+
+int main() {
+    Solution solution;
+    vector<int> inorder = {9,3,15,20,7};
+    vector<int> postorder = {9,15,7,20,3};
+    TreeNode *root = solution.buildTree(inorder, postorder);
+    preorder(root);
+    return 0;
+}
+
+   
+
+ 
+// void creat(TreeNode* &p) {
+//     int a;
+//     cin >> a;
+//     if (a == 0) {
+//         p = nullptr;
+//     }
+//     else {
+//         p = new TreeNode(a);
+//         creat(p->left);
+//         creat(p->right);
+//     }
+// }
+// int treeDepth(TreeNode *root) {
+//         if (root == nullptr) {
+//             return 0;
+//         }
+//         else {
+//             int m = treeDepth(root->left);
+//             int n = treeDepth(root->right);
+//             return m >= n ? (m + 1) : (n + 1);
+//         }
+// }
+// void preorder(TreeNode *root) {
+//     if (root == nullptr) {
+//         return;
+//     }
+//     cout << root->val << " ";
+//     preorder(root->left);
+//     preorder(root->right);
+// }
+// void level(TreeNode *root, int l, vector<vector<int>> &result) {
+//     if (root == nullptr) {
+//         return;
+//     }
+//     //cout << root->val << " ";
+//     result[l].push_back(root->val);
+//     level(root->left, l + 1, result);
+//     level(root->right, l + 1, result);
+// }
+// int main() {
+//     TreeNode *root = nullptr;
+//     creat(root);
+//     preorder(root);
+//     cout << endl;
+//     int l = treeDepth(root);
+//     cout << l << endl;
+//     vector<vector<int>> result(l);
+//     level(root, 0, result);
+//     for (auto &a : result) {
+//         for (auto & b : a) {
+//             cout << b << " ";
+//         }
+//         cout << endl;
+//     }
+//     return 0;
+
+// }
 
 // void reverse(string &s, int i, int j) {
 //     while (i < j) {
@@ -84,11 +140,11 @@ int main() {
 //     int fast = 0;
 //     int slow = 0;
 //     int size = (int)s.size();
-//     //ÁßªÈô§ÊúÄÂâçÈù¢ÁöÑÁ©∫Ê†º
+//     //“∆≥˝◊Ó«∞√Êµƒø’∏Ò
 //     while (fast < size && s[fast] == ' ') {
 //         fast++;
 //     }
-//     //ÁßªÈô§ËøûÁª≠ÁöÑÁ©∫Ê†º
+//     //“∆≥˝¡¨–¯µƒø’∏Ò
 //     for (; fast < size; fast++) {
 //         if (fast - 1 > 0 && s[fast] == ' ' && s[fast - 1] == ' ') {
 //             continue;
@@ -97,7 +153,7 @@ int main() {
 //             s[slow++] = s[fast];
 //         }
 //     }
-//     //ÁßªÈô§ÊúÄÂêéÁöÑÁ©∫Ê†º
+//     //“∆≥˝◊Ó∫Ûµƒø’∏Ò
 //     if (slow - 1 > 0 && s[slow - 1] == ' ') {
 //         s.resize(slow - 1);
 //     }
@@ -108,7 +164,7 @@ int main() {
 
 
 // string& reverseString(string &s) {
-//     //ÂÆåÂÖ®ÂèçËΩ¨
+//     //ÕÍ»´∑¥◊™
 //     reverse(s.begin(), s.end());
 //     removeSpace(s);
 //     for (int i = 0; i < s.size(); i++) {
@@ -167,7 +223,7 @@ int main() {
 //         st.push(node);
 //         st.push(nullptr);
 //         } else {
-//             st.pop();//Á©∫ÊåáÈíàÂá∫Ê†à
+//             st.pop();//ø’÷∏’Î≥ˆ’ª
 //             node = st.top();
 //             st.pop();
 //             result.push_back(node->val);   
@@ -282,7 +338,7 @@ int main() {
 
 
 
-// //KMPÁÆóÊ≥ï
+// //KMPÀ„∑®
 // void getNext(vector<int> &next, string &needle) {
 //     int j = 0;
 //     next[0] = 0;
@@ -350,7 +406,7 @@ int main() {
 // {
 //     return m + n;
 // }
-// // void test(int m, int n, Func func)//ÂáΩÊï∞ÊåáÈíà
+// // void test(int m, int n, Func func)//∫Ø ˝÷∏’Î
 // // {
 // //     int result = func(m, n);
 // //     cout << result << endl;
@@ -363,12 +419,12 @@ int main() {
 // class A {
 // public:
 //     A() {
-//         cout << "ÊûÑÈÄ†ÂáΩÊï∞Ë∞ÉÁî®" << endl;
+//         cout << "ππ‘Ï∫Ø ˝µ˜”√" << endl;
 //     };
 //     A(const A &a) {
-//         cout << "Êã∑Ë¥ùÊûÑÈÄ†ÂáΩÊï∞Ë∞ÉÁî®" << endl;
+//         cout << "øΩ±¥ππ‘Ï∫Ø ˝µ˜”√" << endl;
 //     }
-//     int operator()(int n, int m) { //ÂØπË±°ÈÄöËøáÈáçËΩΩÔºàÔºâÂèò‰∏∫ÂèØË∞ÉÁî®ÂØπË±°ÔºåÂèØ‰ª•ÂÉèÂáΩÊï∞‰∏ÄÊ†∑‰ΩøÁî®
+//     int operator()(int n, int m) { //∂‘œÛÕ®π˝÷ÿ‘ÿ£®£©±‰Œ™ø…µ˜”√∂‘œÛ£¨ø…“‘œÒ∫Ø ˝“ª—˘ π”√
 //        return n + m;
 //     }
 // };
