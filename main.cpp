@@ -25,7 +25,7 @@ public:
             for (index = 0; index <= inorderEnd; index++) {
                 if (inorder[index] == postorder[postorderEnd]) break;
             }
-            // Í³Ò»²ÉÓÃ×ó±ÕÓÒ±ÕµÄ·½Ê½
+            // ç»Ÿä¸€é‡‡ç”¨å·¦é—­å³é—­çš„æ–¹å¼
             int leftinorderBegin = inorderBegin;
             int leftinorderEnd = index - 1;
             int rightinorderBegin = index + 1;
@@ -34,7 +34,7 @@ public:
             int leftpostorderBegin = postorderBegin;
             int leftpostorderEnd = postorderBegin + index - inorderBegin - 1;
             int rightpostorderBegin = postorderBegin + index - inorderBegin;
-            int rightpostorderEnd = postorderEnd - 1;//ÅÅ³ı×îºóÒ»¸öÔªËØ
+            int rightpostorderEnd = postorderEnd - 1;//æ’é™¤æœ€åä¸€ä¸ªå…ƒç´ 
             root->left = build(inorder, leftinorderBegin, leftinorderEnd, postorder, leftpostorderBegin, 
                             leftpostorderEnd);
             root->right = build(inorder, rightinorderBegin, rightinorderEnd, postorder, rightpostorderBegin, 
@@ -140,11 +140,11 @@ int main() {
 //     int fast = 0;
 //     int slow = 0;
 //     int size = (int)s.size();
-//     //ÒÆ³ı×îÇ°ÃæµÄ¿Õ¸ñ
+//     //ç§»é™¤æœ€å‰é¢çš„ç©ºæ ¼
 //     while (fast < size && s[fast] == ' ') {
 //         fast++;
 //     }
-//     //ÒÆ³ıÁ¬ĞøµÄ¿Õ¸ñ
+//     //ç§»é™¤è¿ç»­çš„ç©ºæ ¼
 //     for (; fast < size; fast++) {
 //         if (fast - 1 > 0 && s[fast] == ' ' && s[fast - 1] == ' ') {
 //             continue;
@@ -153,7 +153,7 @@ int main() {
 //             s[slow++] = s[fast];
 //         }
 //     }
-//     //ÒÆ³ı×îºóµÄ¿Õ¸ñ
+//     //ç§»é™¤æœ€åçš„ç©ºæ ¼
 //     if (slow - 1 > 0 && s[slow - 1] == ' ') {
 //         s.resize(slow - 1);
 //     }
@@ -164,7 +164,7 @@ int main() {
 
 
 // string& reverseString(string &s) {
-//     //ÍêÈ«·´×ª
+//     //å®Œå…¨åè½¬
 //     reverse(s.begin(), s.end());
 //     removeSpace(s);
 //     for (int i = 0; i < s.size(); i++) {
@@ -223,7 +223,7 @@ int main() {
 //         st.push(node);
 //         st.push(nullptr);
 //         } else {
-//             st.pop();//¿ÕÖ¸Õë³öÕ»
+//             st.pop();//ç©ºæŒ‡é’ˆå‡ºæ ˆ
 //             node = st.top();
 //             st.pop();
 //             result.push_back(node->val);   
@@ -338,7 +338,7 @@ int main() {
 
 
 
-// //KMPËã·¨
+// //KMPç®—æ³•
 // void getNext(vector<int> &next, string &needle) {
 //     int j = 0;
 //     next[0] = 0;
@@ -406,7 +406,7 @@ int main() {
 // {
 //     return m + n;
 // }
-// // void test(int m, int n, Func func)//º¯ÊıÖ¸Õë
+// // void test(int m, int n, Func func)//å‡½æ•°æŒ‡é’ˆ
 // // {
 // //     int result = func(m, n);
 // //     cout << result << endl;
@@ -419,12 +419,12 @@ int main() {
 // class A {
 // public:
 //     A() {
-//         cout << "¹¹Ôìº¯Êıµ÷ÓÃ" << endl;
+//         cout << "æ„é€ å‡½æ•°è°ƒç”¨" << endl;
 //     };
 //     A(const A &a) {
-//         cout << "¿½±´¹¹Ôìº¯Êıµ÷ÓÃ" << endl;
+//         cout << "æ‹·è´æ„é€ å‡½æ•°è°ƒç”¨" << endl;
 //     }
-//     int operator()(int n, int m) { //¶ÔÏóÍ¨¹ıÖØÔØ£¨£©±äÎª¿Éµ÷ÓÃ¶ÔÏó£¬¿ÉÒÔÏñº¯ÊıÒ»ÑùÊ¹ÓÃ
+//     int operator()(int n, int m) { //å¯¹è±¡é€šè¿‡é‡è½½ï¼ˆï¼‰å˜ä¸ºå¯è°ƒç”¨å¯¹è±¡ï¼Œå¯ä»¥åƒå‡½æ•°ä¸€æ ·ä½¿ç”¨
 //        return n + m;
 //     }
 // };
