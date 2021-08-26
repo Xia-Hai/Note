@@ -14,7 +14,7 @@ public:
     String &operator=(const char *s);
     String operator+(const String &other);
     bool operator==(const String &other);
-    int getLength();//·µ»Ø×Ö·û´®µÄ³¤¶È
+    int getLength();//è¿”å›žå­—ç¬¦ä¸²çš„é•¿åº¦
 
     friend ostream &operator<<(ostream &os, const String &s);
 private:

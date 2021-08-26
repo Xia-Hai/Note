@@ -5,7 +5,7 @@
 String::String(const char *str) {
     if (str == nullptr) {
         m_data = new char[1];
-        *m_data = '\0';//对空的字符串进行处理
+        *m_data = '\0';//瀵圭┖鐨勫瓧绗︿覆杩涜澶勭悊
     } else {
         int length = strlen(str);
         m_data = new char(length + 1);
@@ -26,7 +26,7 @@ String::String(const String &other) {
 }
 
 String &String::operator=(const String &other) {
-    //注意防止自赋值的情况
+    //娉ㄦ剰闃叉鑷祴鍊肩殑鎯呭喌
     if (this == &other) {
         return *this;
     }

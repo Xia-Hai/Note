@@ -25,7 +25,7 @@ public:
             for (index = 0; index <= inorderEnd; index++) {
                 if (inorder[index] == postorder[postorderEnd]) break;
             }
-            // 统一采用左闭右闭的方式
+            // 缁熶竴閲囩敤宸﹂棴鍙抽棴鐨勬柟寮�
             int leftinorderBegin = inorderBegin;
             int leftinorderEnd = index - 1;
             int rightinorderBegin = index + 1;
@@ -34,7 +34,7 @@ public:
             int leftpostorderBegin = postorderBegin;
             int leftpostorderEnd = postorderBegin + index - inorderBegin - 1;
             int rightpostorderBegin = postorderBegin + index - inorderBegin;
-            int rightpostorderEnd = postorderEnd - 1;//排除最后一个元素
+            int rightpostorderEnd = postorderEnd - 1;//鎺掗櫎鏈€鍚庝竴涓厓绱�
             root->left = build(inorder, leftinorderBegin, leftinorderEnd, postorder, leftpostorderBegin, 
                             leftpostorderEnd);
             root->right = build(inorder, rightinorderBegin, rightinorderEnd, postorder, rightpostorderBegin, 
@@ -140,11 +140,11 @@ int main() {
 //     int fast = 0;
 //     int slow = 0;
 //     int size = (int)s.size();
-//     //移除最前面的空格
+//     //绉婚櫎鏈€鍓嶉潰鐨勭┖鏍�
 //     while (fast < size && s[fast] == ' ') {
 //         fast++;
 //     }
-//     //移除连续的空格
+//     //绉婚櫎杩炵画鐨勭┖鏍�
 //     for (; fast < size; fast++) {
 //         if (fast - 1 > 0 && s[fast] == ' ' && s[fast - 1] == ' ') {
 //             continue;
@@ -153,7 +153,7 @@ int main() {
 //             s[slow++] = s[fast];
 //         }
 //     }
-//     //移除最后的空格
+//     //绉婚櫎鏈€鍚庣殑绌烘牸
 //     if (slow - 1 > 0 && s[slow - 1] == ' ') {
 //         s.resize(slow - 1);
 //     }
@@ -164,7 +164,7 @@ int main() {
 
 
 // string& reverseString(string &s) {
-//     //完全反转
+//     //瀹屽叏鍙嶈浆
 //     reverse(s.begin(), s.end());
 //     removeSpace(s);
 //     for (int i = 0; i < s.size(); i++) {
@@ -223,7 +223,7 @@ int main() {
 //         st.push(node);
 //         st.push(nullptr);
 //         } else {
-//             st.pop();//空指针出栈
+//             st.pop();//绌烘寚閽堝嚭鏍�
 //             node = st.top();
 //             st.pop();
 //             result.push_back(node->val);   
@@ -338,7 +338,7 @@ int main() {
 
 
 
-// //KMP算法
+// //KMP绠楁硶
 // void getNext(vector<int> &next, string &needle) {
 //     int j = 0;
 //     next[0] = 0;
@@ -406,7 +406,7 @@ int main() {
 // {
 //     return m + n;
 // }
-// // void test(int m, int n, Func func)//函数指针
+// // void test(int m, int n, Func func)//鍑芥暟鎸囬拡
 // // {
 // //     int result = func(m, n);
 // //     cout << result << endl;
@@ -419,12 +419,12 @@ int main() {
 // class A {
 // public:
 //     A() {
-//         cout << "构造函数调用" << endl;
+//         cout << "鏋勯€犲嚱鏁拌皟鐢�" << endl;
 //     };
 //     A(const A &a) {
-//         cout << "拷贝构造函数调用" << endl;
+//         cout << "鎷疯礉鏋勯€犲嚱鏁拌皟鐢�" << endl;
 //     }
-//     int operator()(int n, int m) { //对象通过重载（）变为可调用对象，可以像函数一样使用
+//     int operator()(int n, int m) { //瀵硅薄閫氳繃閲嶈浇锛堬級鍙樹负鍙皟鐢ㄥ璞★紝鍙互鍍忓嚱鏁颁竴鏍蜂娇鐢�
 //        return n + m;
 //     }
 // };
